@@ -1,0 +1,45 @@
+### Variáveis globais
+@baseUrl = http://localhost:3333
+
+### 1. Teste de Saúde da API
+GET {{baseUrl}}/health
+
+### 2. Listar todos os utilizadores
+GET {{baseUrl}}/users
+
+### 3. Criar um novo Utilizador
+# @name createUser
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "Maria Silva",
+  "email": "maria@email.com",
+  "password": "123456"
+}
+
+### 4. Cadastrar um Medicamento para o Utilizador
+# Substitua O_ID_DO_USUARIO_AQUI pelo ID gerado na requisição acima
+POST {{baseUrl}}/medications
+Content-Type: application/json
+
+{
+  "name": "Paracetamol",
+  "dosage": "750mg",
+  "manufacturer": "Medley",
+  "isGeneric": true,
+  "price": 18.50,
+  "quantityInStock": 10,
+  "refillThreshold": 3,
+  "frequencyHours": 8,
+  "nextDoseAt": "2026-09-23T14:00:00.000Z",
+  "userId": "830ad9e6-2431-4b8d-968c-424b3891dcc1"
+}
+
+### 5. Listar Medicamentos de um Utilizador
+# Substitua O_ID_DO_USUARIO_AQUI pelo ID do utilizador
+GET {{baseUrl}}/users/O_ID_DO_USUARIO_AQUI/medications
+
+### 6. Registrar Toma de Dose (Baixa no Estoque)
+# Substitua O_ID_DO_MEDICAMENTO_AQUI pelo ID do medicamento
+PATCH {{baseUrl}}/medications/4f3ddc74-ce4e-4fa5-8cad-e9ec7df57ffb/take
